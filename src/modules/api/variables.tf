@@ -48,26 +48,6 @@ variable "api_operations" {
   default = []  # Makes variable optional
 }
 
-# variable "operation_policies" {
-#   description = "List of Operation Policies"
-#   type = list(object({
-#     operation_policy_name      = string # Must be unique (serves as index)
-#     api_name              = string # Must match api_name
-#     policy_path           = string
-#     operation_names = list(string)
-#   }))
-#   default = []  # Makes variable optional
-# }
-
-# variable "xml_policies" {
-#   description = "Map of API operations to their XML policies and associated operation IDs"
-#   type = map(object({
-#     policy_path = string
-#     operations  = list(string) # Key: operation_name, Value: operation_id
-#   }))
-#   default = null  # Makes variable optional
-# }
-
 variable "operation_policies" {
   description = "Map of operation policies with policy details"
   type = map(object({
