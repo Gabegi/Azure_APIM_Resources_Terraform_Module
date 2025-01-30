@@ -43,7 +43,7 @@ resource "azurerm_api_management_api_policy" "api_policy" {
 }
 
 // nullable
-resource "azurerm_api_management_api_operation" "api_operation" {
+resource "azurerm_api_management_api_operation" "api_operations" {
 
     
     for_each = { for operation in var.api_operations : operation.api_operation_name => operation}
@@ -58,32 +58,19 @@ resource "azurerm_api_management_api_operation" "api_operation" {
   method              = each.value.method
   url_template        = each.value.url_template
   description         = each.value.description
-
-
-  response {
-    status_code = 200 // TBC
-  }
 }
 
 // nullable
 resource "azurerm_api_management_api_policy" "api_operations_policy" {
 
-    for_each = { for policy in var.operation_policies : policy.operation_policy_name => policy}
+  for_each = { for policy in var.operation_policies : policy.operation_policy_name => policy }
+
 
   resource_group_name = var.apim.resource_group_name
   api_management_name = var.apim.name
   api_name            = each.value.api_name
-
-  # Build the xml_content dynamically
-  xml_content = templatefile(
-    each.value.policy_path,
-    {
-      operations = {
-        for op in each.value.operation_names :
-        op => azurerm_api_management_api_operation.api_operations[op].operation_id
-      }
-    }
-  )
+  
+  xml_content = templatefile(each.value.policy_path, each.value.operation_names)
 
   depends_on = [azurerm_api_management_api_operation.api_operations]
 }
