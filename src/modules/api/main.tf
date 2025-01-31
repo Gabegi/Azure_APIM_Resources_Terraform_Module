@@ -27,6 +27,15 @@ resource "azurerm_api_management_api" "api" {
   service_url           = each.value.service_url
 
   version_set_id  = azurerm_api_management_api_version_set.version_set[each.value.version_set_name].id
+
+  # Conditionally include the import block only if openapi_file is NOT null
+  dynamic "import" {
+    for_each = each.value.openapi_file != null ? [each.value.openapi_file] : []
+    content {
+      content_format = each.value.content_format
+      content_value  = file(import.value.openapi_file)
+    }
+  }
 }
 
 // nullable

@@ -12,6 +12,8 @@ variable "apis" {
     subscription_required = bool
     version_set_name      = string  # Must match api_version_set_name
     service_url           = optional(string) # Makes variable optional
+    openapi_file          = optional(string) # Makes variable optional
+    content_format        = optional(string)  # Makes variable optional
   }))
 }
 
