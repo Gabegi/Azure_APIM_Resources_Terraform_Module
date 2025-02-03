@@ -19,6 +19,7 @@ resource "azurerm_api_management_product_api" "apim_product_api" {
 
   api_name            = each.value
   product_id          = azurerm_api_management_product.apim_product.product_id
+
+  // Subscription allow_tracing = true
 }
 
-// Subscription allow_tracing = true

@@ -33,7 +33,8 @@ resource "azurerm_api_management_api" "api" {
     for_each = each.value.openapi_file != null ? [each.value.openapi_file] : []
     content {
       content_format = each.value.content_format
-      content_value  = file(import.value.openapi_file)
+        # Use openapi file if content_format is "openapi", otherwise use storage blob URL
+        content_value  = each.value.content_format == "openapi" ? file(each.value.openapi_file) : each.value.openapi_file
     }
   }
 }
