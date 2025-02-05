@@ -60,6 +60,17 @@ variable "operation_policies" {
   }))
 }
 
+variable "products" {
+  description = "List of Products"
+  type = object({
+    display_name          = string
+    product_id            = string
+    subscription_required = bool
+    published             = bool
+  })
+}
+  
+
 variable "apim" {
   type    = map(string)
   default = {}
@@ -69,3 +80,4 @@ variable "apim" {
 variable "subscription_id" {
   type = string
 }
+
