@@ -37,6 +37,8 @@ resource "azurerm_api_management_api" "api" {
         content_value  = each.value.content_format == "openapi" ? file(each.value.openapi_file) : each.value.openapi_file
     }
   }
+    depends_on = [ azurerm_api_management_api_version_set.version_set ]
+
 }
 
 // nullable
