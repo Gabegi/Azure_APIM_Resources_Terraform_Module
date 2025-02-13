@@ -70,7 +70,20 @@ resource "azurerm_api_management_api_operation" "api_operations" {
   method              = each.value.method
   url_template        = each.value.url_template
   description         = each.value.description
+
+  dynamic "template_parameter" {
+    for_each = lookup(each.value, "template_parameter", []) # If not present, defaults to empty list
+    content {
+      name     = template_parameter.value.name
+      type     = template_parameter.value.type
+      required = try(template_parameter.value.required, false) # Defaults to false if not provided
+    }
+  }
+
+  depends_on = [ azurerm_api_management_api.api ]
+
 }
+
 
 // nullable
 resource "azurerm_api_management_api_policy" "api_operations_policy" {

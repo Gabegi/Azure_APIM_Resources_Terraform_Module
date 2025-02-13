@@ -17,7 +17,7 @@ module "products" {
     resource_group_name = azurerm_resource_group.rg.name
     name                = azurerm_api_management.apim.name
   }
-  apim_products_api = module.bc_apis.api_names
+  apim_products_api = module.apis.api_names
   apim_product = var.products
   
 }

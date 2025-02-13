@@ -71,3 +71,12 @@ bc_operation_policies = {
 ```
 
 ## Product Module tfvars
+```
+products = {
+  display_name = "My Product"
+  product_id   = "my-product"
+  subscription_required = true
+  published             = true
+}
+
+```

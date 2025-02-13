@@ -35,19 +35,22 @@ variable "api_policies" {
   default = []  # Makes variable optional
 }
 
-
 variable "api_operations" {
   description = "List of API Operations"
   type = list(object({
-    api_operation_name   = string # Must be unique (serves as index)
-    api_name              = string # Must match api_name
-    operation_id        = string
-    display_name        = string
-    method              = string
-    url_template        = string
-    description         = string
+    api_operation_name = string
+    api_name           = string
+    operation_id       = string
+    display_name       = string
+    method             = string
+    url_template       = string
+    description        = string
+    template_parameter = optional(list(object({
+      name     = string
+      type     = string
+      required = optional(bool, false)
+    })), []) # Defaults to an empty list if not provided
   }))
-  default = []  # Makes variable optional
 }
 
 variable "operation_policies" {
