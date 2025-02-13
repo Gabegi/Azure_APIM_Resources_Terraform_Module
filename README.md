@@ -9,7 +9,7 @@ Then, navigate to the repo and run:
 - terraform destroy -var-file="vars/values.tfvars"
 
 To create an API, simply add to your tfvars file
-## API Module
+## API Module tfvars
 
 ```
 version_sets = [
@@ -69,3 +69,5 @@ bc_operation_policies = {
   }
 }
 ```
+
+## Product Module tfvars
