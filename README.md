@@ -8,4 +8,14 @@ Then, navigate to the repo and run:
 - terraform apply -auto-approve -var-file="vars/values.tfvars" 
 - terraform destroy -var-file="vars/values.tfvars"
 
-To create an API, simply 
+To create an API, simply add to your tfvars file
+## API Module
+
+```
+version_sets = [
+  {
+    api_version_set_name        = "my-version-set"
+    api_version_set_display_name = "My Version Set"
+  }
+]
+```
