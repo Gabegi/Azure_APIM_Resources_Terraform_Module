@@ -8,7 +8,7 @@ Then, navigate to the repo and run:
 - terraform apply -auto-approve -var-file="vars/values.tfvars" 
 - terraform destroy -var-file="vars/values.tfvars"
 
-To create an API, simply add to your tfvars file
+To create an resources, simply add to your tfvars file the following
 ## API Module tfvars
 
 ```
